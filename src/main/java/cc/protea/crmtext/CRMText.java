@@ -5,9 +5,10 @@ import java.util.Map;
 
 import javax.xml.bind.DatatypeConverter;
 
+import cc.protea.crmtext.model.CRMTextBasicResponse;
 import cc.protea.crmtext.model.CRMTextCreateStoreResponse;
+import cc.protea.crmtext.model.CRMTextCustomerChangeResponse;
 import cc.protea.crmtext.model.CRMTextIsStoreAvailableResponse;
-import cc.protea.crmtext.model.CRMTextOptInCustomerResponse;
 import cc.protea.crmtext.model.CRMTextResponse;
 import cc.protea.crmtext.model.CRMTextSendMessageResponse;
 import cc.protea.util.http.Request;
@@ -26,7 +27,8 @@ public class CRMText {
 		this.store = store;
 	}
 
-	// API
+	////////////////////////////////////////////////////////////
+	// API - Store Creation and Management
 
 	/**
 	 * Validate that a desired store keyword is available
@@ -72,10 +74,23 @@ public class CRMText {
 	}
 
 	/**
+	 * Set the URL for inbound message notifications
+	 * @param url the publicly reachable URL to be used as a webhook when messages arrive
+	 */
+	public CRMTextBasicResponse setCallbackUrl(final String url) {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("callback", url);
+		return post("setcallback", parameters, CRMTextBasicResponse.class);
+	}
+
+	////////////////////////////////////////////////////////////
+	// API - Customers
+
+	/**
 	 * Add a new subscriber to your store
 	 * @param phoneNumber the number to send to
 	 */
-	public CRMTextOptInCustomerResponse optInCustomer(final String phoneNumber) {
+	public CRMTextCustomerChangeResponse optInCustomer(final String phoneNumber) {
 		return optInCustomer(phoneNumber, null, null);
 	}
 
@@ -85,13 +100,26 @@ public class CRMText {
 	 * @param firstName the subscriber's first name
 	 * @param lastName the subscriber's last name
 	 */
-	public CRMTextOptInCustomerResponse optInCustomer(final String phoneNumber, final String firstName, final String lastName) {
+	public CRMTextCustomerChangeResponse optInCustomer(final String phoneNumber, final String firstName, final String lastName) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("phone_number", CRMTextUtils.formatPhoneNumber(phoneNumber));
 		parameters.put("firstname", firstName);
 		parameters.put("lastname", lastName);
-		return post("optincustomer", parameters, CRMTextOptInCustomerResponse.class);
+		return post("optincustomer", parameters, CRMTextCustomerChangeResponse.class);
 	}
+
+	/**
+	 * Remove a subscriber from your store
+	 * @param phoneNumber the number used to send to
+	 */
+	public CRMTextCustomerChangeResponse optOutCustomer(final String phoneNumber) {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("phone_number", CRMTextUtils.formatPhoneNumber(phoneNumber));
+		return post("optoutcustomer", parameters, CRMTextCustomerChangeResponse.class);
+	}
+
+	////////////////////////////////////////////////////////////
+	// API - Messaging
 
 	/**
 	 * Send a message to a single opted-in phone number in your store
