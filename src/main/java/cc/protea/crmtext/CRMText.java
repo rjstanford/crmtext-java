@@ -66,7 +66,9 @@ public class CRMText {
 		parameters.put("phonenumber", CRMTextUtils.formatPhoneNumber(phoneNumber));
 		parameters.put("emailid", emailAddress);
 		parameters.put("password", password);
-		return post("createstoreanduser", parameters, CRMTextCreateStoreResponse.class);
+		CRMTextCreateStoreResponse response = post("createstoreanduser", parameters, CRMTextCreateStoreResponse.class);
+		response.store.store = store;
+		return response;
 	}
 
 	/**
@@ -133,8 +135,7 @@ public class CRMText {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("message", message);
 		parameters.put("mmsurl", imageUrl);
-//		return post("sendcampaign", parameters, CRMTextResponse.class);
-		return null; // TODO testing
+		return post("sendcampaign", parameters, CRMTextResponse.class);
 	}
 
 	// Helper methods that use class variables

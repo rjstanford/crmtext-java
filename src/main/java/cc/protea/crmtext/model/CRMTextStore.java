@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 public class CRMTextStore {
 
 	@XmlElement(name = "store-id") public String id;
+	public String store;
 	@XmlElement(name = "store-name") public String name;
 	@XmlElement(name = "store-phone") public String phoneNumber;
 }

@@ -2,16 +2,16 @@ package cc.protea.crmtext.servlet;
 
 import java.util.Date;
 
+import cc.protea.crmtext.model.CRMTextCustomer;
+import cc.protea.crmtext.model.CRMTextStore;
+
 public class CRMTextInboundMessage {
 
-	public String customerId;
-	public String message;
-	public String store;
-	public String phoneNumber;
-	public String optInStatus; // TODO enum
+	public CRMTextStore store = new CRMTextStore();
+	public CRMTextCustomer customer = new CRMTextCustomer();
+
 	public Date timestamp;
-	public String subacct;
-	public String customerName;
-	public String msgID;
-	public String subacct_name;
+	public String messageId;
+
+	public String message;
 }
