@@ -8,8 +8,8 @@
 	<version>.1</version>
 	<packaging>jar</packaging>
 
-	<name>spreedly</name>
-	<description>Java SDK around the Spreedly RESTful API</description>
+	<name>CRMText API</name>
+	<description>Java SDK around the CRMText API</description>
 
 	<url>https://github.com/rjstanford/crmtext-java</url>
 
