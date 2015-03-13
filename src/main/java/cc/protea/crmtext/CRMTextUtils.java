@@ -13,7 +13,7 @@ import cc.protea.crmtext.model.CRMTextResponse;
 import cc.protea.util.http.Request;
 import cc.protea.util.http.Response;
 
-public class CRMTextUtils {
+class CRMTextUtils {
 
 	// TODO all inbound dates are in Pacific Time (because that's just stupid). Convert to UTC before returning.
 
@@ -22,6 +22,9 @@ public class CRMTextUtils {
 		try {
 			response = request.postResource();
 			T ret = CRMTextUtils.convert(response.getBody(), type, true);
+			if (ret == null) {
+				throw new CRMTextException(null);
+			}
 			ret.success = response.getResponseCode() == 200;
 			return ret;
 		} catch (IOException e) {

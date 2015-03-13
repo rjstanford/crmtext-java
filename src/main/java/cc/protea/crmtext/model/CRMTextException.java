@@ -9,6 +9,10 @@ public class CRMTextException extends RuntimeException {
 	public String errorMessage;
 	public String errorCode;
 
+	public CRMTextException() {
+		super();
+	}
+
 	public CRMTextException(final Exception e) {
 		super(e);
 	}
