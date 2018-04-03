@@ -5,7 +5,7 @@
 
 	<groupId>cc.protea.crmtext</groupId>
 	<artifactId>crmtext</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<packaging>jar</packaging>
 
 	<name>CRMText API</name>

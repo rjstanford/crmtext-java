@@ -141,7 +141,7 @@ public class CRMText {
 		parameters.put("phone_number", CRMTextUtils.formatPhoneNumber(phoneNumber));
 		parameters.put("message", message);
 		parameters.put("mmsurl", imageUrl);
-		return post("sendsmsmsg", parameters, CRMTextSendMessageResponse.class);
+		return post("sendoptinandsms", parameters, CRMTextSendMessageResponse.class);
 	}
 
 	/**
